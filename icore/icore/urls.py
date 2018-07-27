@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
+#	url(r'^/$', name='index'),
+	url(r'^user/login/$', auth_views.login, name='login'),
+	url(r'^user/logout/$', auth_views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_roote=settings.STATIC_ROOT)
